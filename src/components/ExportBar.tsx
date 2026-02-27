@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Button, Text } from '@adobe/react-spectrum'
+import { Button, Text, ToastQueue } from '@adobe/react-spectrum'
 import { saveAs } from 'file-saver'
 import { useStore } from '../store'
 import type { DecalFile } from '../types'
@@ -7,7 +6,6 @@ import styles from '../App.module.css'
 
 export function ExportBar() {
   const layers = useStore((s) => s.layers)
-  const [copyLabel, setCopyLabel] = useState('Copy to Clipboard')
   const hasLayers = layers.length > 0
 
   function buildJson(): string {
@@ -17,9 +15,12 @@ export function ExportBar() {
 
   async function handleCopy() {
     const json = buildJson()
-    await navigator.clipboard.writeText(json)
-    setCopyLabel('Copied!')
-    setTimeout(() => setCopyLabel('Copy to Clipboard'), 2000)
+    try {
+      await navigator.clipboard.writeText(json)
+      ToastQueue.positive('Copied to clipboard!', { timeout: 3000 })
+    } catch {
+      ToastQueue.negative('Failed to copy to clipboard')
+    }
   }
 
   function handleDownload() {
@@ -32,7 +33,7 @@ export function ExportBar() {
     <section className={styles.section}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
         <Button variant="primary" onPress={handleCopy} isDisabled={!hasLayers}>
-          {copyLabel}
+          Copy to Clipboard
         </Button>
         <Button variant="secondary" onPress={handleDownload} isDisabled={!hasLayers}>
           Download JSON

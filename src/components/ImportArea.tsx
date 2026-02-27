@@ -4,6 +4,7 @@ import {
   Button,
   AlertDialog,
   DialogTrigger,
+  ToastQueue,
 } from '@adobe/react-spectrum'
 import { useStore } from '../store'
 import { validateDecalJson } from '../utils/validation'
@@ -19,10 +20,12 @@ export function ImportArea() {
     const result = validateDecalJson(jsonText)
     if (!result.ok) {
       setError(result.error)
+      ToastQueue.negative(result.error, { timeout: 5000 })
       return
     }
     setError(null)
     importLayers(result.layers)
+    ToastQueue.positive(`Imported ${result.layers.length} layer${result.layers.length !== 1 ? 's' : ''}`, { timeout: 3000 })
   }
 
   const importButton = isDirty ? (
