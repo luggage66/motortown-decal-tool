@@ -5,6 +5,7 @@
   --border-subtle: #3a3a5a;
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0b0;
+  --accent: #6c8cff;
 }
 
 * {
@@ -16,8 +17,21 @@ body {
   background: var(--bg-base);
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
 }
 
 #root {
   min-height: 100vh;
+}
+
+/* Monospace font for all numeric inputs */
+input[type="number"],
+input[inputmode="numeric"],
+.spectrum-Textfield-input[type="number"] {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+
+/* Compact React Spectrum overrides for game-tool density */
+.spectrum-Field {
+  margin-bottom: 0;
 }
