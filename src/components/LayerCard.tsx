@@ -9,6 +9,7 @@ import {
 } from '@adobe/react-spectrum'
 import { useStore } from '../store'
 import { ColorSwatch } from './ColorSwatch'
+import { ColorPickerTrigger } from './ColorPicker'
 import { FLAG_DEFINITIONS, getFlagBit, setFlagBit } from '../constants'
 import type { DecalLayer } from '../types'
 import styles from './LayerCard.module.css'
@@ -53,7 +54,9 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
     <div className={styles.card}>
       {/* Header: swatch, decalKey, layer number, actions */}
       <div className={styles.headerRow}>
-        <ColorSwatch color={layer.color} />
+        <ColorPickerTrigger color={layer.color} onChange={(c) => update({ color: c })}>
+          <ColorSwatch color={layer.color} />
+        </ColorPickerTrigger>
         <ComboBox
           label="Decal Key"
           labelPosition="side"

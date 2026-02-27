@@ -1,0 +1,66 @@
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 232px;
+}
+
+.modeToggle {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-base);
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.modeBtn {
+  flex: 1;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.modeBtn:hover {
+  color: var(--text-primary);
+}
+
+.active {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.pickerArea :global(.react-colorful) {
+  width: 100%;
+  height: 160px;
+  border-radius: 4px;
+}
+
+.channels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+}
+
+.popover {
+  position: absolute;
+  z-index: 100;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
