@@ -1,6 +1,7 @@
 import { Provider, darkTheme } from '@adobe/react-spectrum'
 import { Header } from './components/Header'
 import { ImportArea } from './components/ImportArea'
+import { LayerList } from './components/LayerList'
 import { ExportBar } from './components/ExportBar'
 import styles from './App.module.css'
 
@@ -16,8 +17,9 @@ function App() {
 
         {/* Phase 6: ColorPalette */}
 
-        {/* Phase 4: LayerList */}
-        <section className={styles.layerListSection} />
+        <section className={styles.layerListSection}>
+          <LayerList />
+        </section>
 
         <ExportBar />
       </div>

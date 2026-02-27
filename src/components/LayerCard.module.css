@@ -1,0 +1,64 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.layerIndex {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.fieldRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.sliderRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sliderGroup {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex: 1;
+  min-width: 240px;
+}
+
+.sliderGroup > :first-child {
+  flex: 1;
+}
+
+.flagsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.flagBits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+}
