@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
-import { Provider, darkTheme, ToastContainer } from '@adobe/react-spectrum'
+import { Provider, darkTheme, ToastContainer, Tabs, TabList, TabPanels, Item } from '@adobe/react-spectrum'
 import { UploadScreen } from './components/UploadScreen'
 import { EditorHeader } from './components/EditorHeader'
 import { Sidebar } from './components/Sidebar'
 import { LayerList } from './components/LayerList'
+import { JsonEditor } from './components/JsonEditor'
 import { useStore } from './store'
 import styles from './App.module.css'
 
@@ -46,7 +47,20 @@ function App() {
           <div className={styles.editorBody}>
             <Sidebar />
             <main className={styles.mainContent}>
-              <LayerList />
+              <Tabs aria-label="Editor tabs" UNSAFE_className={styles.tabs}>
+                <TabList>
+                  <Item key="layers">Layers</Item>
+                  <Item key="json">JSON</Item>
+                  <Item key="preview">Preview</Item>
+                </TabList>
+                <TabPanels UNSAFE_className={styles.tabPanels}>
+                  <Item key="layers"><LayerList /></Item>
+                  <Item key="json"><JsonEditor /></Item>
+                  <Item key="preview">
+                    <div className={styles.placeholder}>Preview coming probably never</div>
+                  </Item>
+                </TabPanels>
+              </Tabs>
             </main>
           </div>
         </div>
