@@ -1,0 +1,21 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-base);
+  border-radius: 4px;
+  padding: 4px 8px 4px 4px;
+}
+
+.count {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
