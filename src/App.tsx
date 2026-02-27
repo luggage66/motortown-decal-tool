@@ -1,6 +1,7 @@
 import { Provider, darkTheme } from '@adobe/react-spectrum'
 import { Header } from './components/Header'
 import { ImportArea } from './components/ImportArea'
+import { Toolbar } from './components/Toolbar'
 import { ColorPalette } from './components/ColorPalette'
 import { LayerList } from './components/LayerList'
 import { ExportBar } from './components/ExportBar'
@@ -14,7 +15,7 @@ function App() {
 
         <ImportArea />
 
-        {/* Phase 7: Toolbar (Undo/Redo) */}
+        <Toolbar />
 
         <ColorPalette />
 
