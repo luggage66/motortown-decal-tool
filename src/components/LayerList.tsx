@@ -2,6 +2,7 @@ import { useRef, useState, useMemo } from 'react'
 import { Button } from '@adobe/react-spectrum'
 import { useStore } from '../store'
 import { LayerCard } from './LayerCard'
+import styles from './LayerList.module.css'
 
 export function LayerList() {
   const layers = useStore((s) => s.layers)
@@ -27,7 +28,7 @@ export function LayerList() {
 
   if (layers.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: 40, color: 'var(--text-secondary)' }}>
+      <div className={styles.emptyState}>
         <p>No layers loaded. Import a decal JSON file to get started.</p>
         <Button variant="secondary" onPress={addLayer}>Add Layer</Button>
       </div>
@@ -35,17 +36,12 @@ export function LayerList() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+    <div className={styles.list}>
       {layers.map((_, i) => (
         <div
           key={i}
-          style={{
-            display: 'flex',
-            alignItems: 'stretch',
-            outline: dragOverIndex === i ? '2px solid var(--accent)' : undefined,
-            outlineOffset: dragOverIndex === i ? -2 : undefined,
-            borderRadius: 6,
-          }}
+          className={styles.layerWrapper}
+          data-drag-over={dragOverIndex === i || undefined}
           onDragOver={(e) => { e.preventDefault(); setDragOverIndex(i) }}
           onDragLeave={(e) => {
             if (!e.currentTarget.contains(e.relatedTarget as Node)) {
@@ -58,17 +54,7 @@ export function LayerList() {
             draggable
             onDragStart={() => { dragIndexRef.current = i }}
             onDragEnd={() => { dragIndexRef.current = null; setDragOverIndex(null) }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0 6px',
-              cursor: 'grab',
-              color: 'var(--text-secondary)',
-              fontSize: 20,
-              userSelect: 'none',
-              opacity: 0.5,
-              flexShrink: 0,
-            }}
+            className={styles.dragHandle}
             title="Drag to reorder"
           >
             ⠿
