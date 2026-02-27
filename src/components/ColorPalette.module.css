@@ -1,3 +1,16 @@
+.sectionTitle {
+  margin: 0 0 4px 0;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+.sectionCount {
+  font-weight: 400;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;

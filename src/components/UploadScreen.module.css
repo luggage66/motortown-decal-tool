@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 32px;
+  padding: 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dropZone {
+  width: 100%;
+  max-width: 520px;
+  min-height: 280px;
+  border: 2px dashed var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+  outline: none;
+}
+
+.dropZone:focus-visible {
+  border-color: var(--accent);
+}
+
+.dragOver {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+
+.hasError {
+  border-color: #e06060;
+}
+
+.dropContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px;
+  text-align: center;
+}
+
+.uploadIcon {
+  font-size: 36px;
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.dropText {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dropHint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.errorText {
+  color: #e06060;
+  font-size: 13px;
+  margin: 0;
+}
+
+.hiddenInput {
+  display: none;
+}

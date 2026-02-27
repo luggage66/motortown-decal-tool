@@ -6,6 +6,7 @@
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0b0;
   --accent: #6c8cff;
+  --sidebar-width: 280px;
 }
 
 * {
