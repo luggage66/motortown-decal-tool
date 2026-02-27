@@ -2,6 +2,9 @@
   "permissions": {
     "additionalDirectories": [
       "/Users/dmull/personal/motortown-decal-tool/src"
+    ],
+    "allow": [
+      "Bash(npm run build)"
     ]
   }
 }
