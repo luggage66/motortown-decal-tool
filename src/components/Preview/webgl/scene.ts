@@ -3,6 +3,7 @@ import {
   ARROW_OPACITY_ACTIVE,
   ARROW_OPACITY_DIMMED,
   CAR_BOX_OPACITY,
+  CAR_WIREFRAME_OPACITY,
   ARROW_CONE_LENGTH,
 } from "../constants";
 import {
@@ -17,7 +18,12 @@ import {
   invert,
 } from "./math";
 import { VERT_SRC, FRAG_SRC, compileProgram } from "./shaders";
-import { buildCarBox, buildArrow, computeArrowGeometry } from "./geometry";
+import {
+  buildCarBox,
+  buildArrow,
+  buildCarBoxWireframe,
+  computeArrowGeometry,
+} from "./geometry";
 
 const DEG = Math.PI / 180;
 const PICK_THRESHOLD = 15;
@@ -68,6 +74,14 @@ export function initScene(
   const carBoxVbo = gl.createBuffer()!;
   gl.bindBuffer(gl.ARRAY_BUFFER, carBoxVbo);
   gl.bufferData(gl.ARRAY_BUFFER, carBoxData, gl.STATIC_DRAW);
+
+  const carFaces = buildCarBoxWireframe();
+  const carFaceVbos = carFaces.map((face) => {
+    const vbo = gl.createBuffer()!;
+    gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+    gl.bufferData(gl.ARRAY_BUFFER, face.lineVerts, gl.STATIC_DRAW);
+    return vbo;
+  });
 
   // -------------------------------------------------------------------------
   // GL state
@@ -193,13 +207,27 @@ export function initScene(
     gl.uniformMatrix4fv(uMvp, false, vp);
     gl.enableVertexAttribArray(aPosition);
 
-    // 1. Car box — depth write off so arrows behind it stay visible
+    // 1. Car box + wireframe — depth write off so arrows behind it stay visible
     gl.depthMask(false);
+
+    // solid fill
     gl.uniform3f(uColor, 0.5, 0.5, 0.5);
     gl.uniform1f(uOpacity, CAR_BOX_OPACITY);
     gl.bindBuffer(gl.ARRAY_BUFFER, carBoxVbo);
     gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
     gl.drawArrays(gl.TRIANGLES, 0, carBoxData.length / 3);
+
+    // wireframe — visible faces only
+    gl.uniform3f(uColor, 1, 1, 1);
+    gl.uniform1f(uOpacity, CAR_WIREFRAME_OPACITY);
+    for (let i = 0; i < carFaces.length; i++) {
+      if (dot(carFaces[i].normal, sub(eye, carFaces[i].planePoint)) <= 0)
+        continue;
+      gl.bindBuffer(gl.ARRAY_BUFFER, carFaceVbos[i]);
+      gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
+      gl.drawArrays(gl.LINES, 0, 8); // 4 edges × 2 endpoints
+    }
+
     gl.depthMask(true);
 
     // 2. Rebuild arrow VBOs if layer array changed
@@ -393,6 +421,7 @@ export function initScene(
         gl.deleteBuffer(c.lineVbo);
         gl.deleteBuffer(c.coneVbo);
       }
+      for (const vbo of carFaceVbos) gl.deleteBuffer(vbo);
       gl.deleteBuffer(carBoxVbo);
       gl.deleteProgram(program);
     },

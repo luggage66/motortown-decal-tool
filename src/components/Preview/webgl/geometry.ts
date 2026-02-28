@@ -61,6 +61,62 @@ export function buildCarBox(): Float32Array {
 }
 
 // ---------------------------------------------------------------------------
+// Car box wireframe — per-face edge lists for visible-face rendering
+// ---------------------------------------------------------------------------
+
+export interface CarFace {
+  /** Outward-facing unit normal */
+  normal: Vec3;
+  /** Any point on the face plane (for dot-product visibility test) */
+  planePoint: Vec3;
+  /** 4 edges × 2 endpoints = 8 Vec3s packed as 24 floats for GL_LINES */
+  lineVerts: Float32Array;
+}
+
+export function buildCarBoxWireframe(): CarFace[] {
+  const x0 = -CAR_WIDTH / 2,
+    x1 = CAR_WIDTH / 2;
+  const y0 = CAR_GROUND_CLEARANCE,
+    y1 = CAR_GROUND_CLEARANCE + CAR_HEIGHT;
+  const z0 = -CAR_LENGTH / 2,
+    z1 = CAR_LENGTH / 2;
+
+  const corners: Vec3[] = [
+    [x0, y0, z0], // 0 left  bottom back
+    [x1, y0, z0], // 1 right bottom back
+    [x1, y1, z0], // 2 right top    back
+    [x0, y1, z0], // 3 left  top    back
+    [x0, y0, z1], // 4 left  bottom front
+    [x1, y0, z1], // 5 right bottom front
+    [x1, y1, z1], // 6 right top    front
+    [x0, y1, z1], // 7 left  top    front
+  ];
+
+  const faces: Array<{ normal: Vec3; idx: [number, number, number, number] }> =
+    [
+      { normal: [0, 0, -1], idx: [0, 1, 2, 3] }, // back
+      { normal: [0, 0, 1], idx: [4, 7, 6, 5] }, // front
+      { normal: [-1, 0, 0], idx: [0, 3, 7, 4] }, // left
+      { normal: [1, 0, 0], idx: [1, 5, 6, 2] }, // right
+      { normal: [0, -1, 0], idx: [0, 4, 5, 1] }, // bottom
+      { normal: [0, 1, 0], idx: [3, 2, 6, 7] }, // top
+    ];
+
+  return faces.map(({ normal, idx }) => {
+    const pts = idx.map((i) => corners[i]);
+    const verts: number[] = [];
+    for (let i = 0; i < 4; i++) {
+      verts.push(...pts[i], ...pts[(i + 1) % 4]);
+    }
+    return {
+      normal: normal as Vec3,
+      planePoint: pts[0],
+      lineVerts: new Float32Array(verts),
+    };
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Arrow geometry — shaft line + cone triangles
 // ---------------------------------------------------------------------------
 
