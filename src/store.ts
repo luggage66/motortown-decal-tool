@@ -10,6 +10,7 @@ interface DecalState {
   selectedLayerIndex: number | null;
 
   importLayers: (layers: DecalLayer[]) => void;
+  appendLayers: (layers: DecalLayer[]) => void;
   setSelectedLayer: (index: number | null) => void;
   updateLayer: (index: number, partial: Partial<DecalLayer>) => void;
   addLayer: () => void;
@@ -52,6 +53,14 @@ export const useStore = create<DecalState>((set) => ({
       redoStack: [],
       isDirty: false,
     }),
+
+  appendLayers: (layers) =>
+    set((state) => ({
+      layers: [...state.layers, ...layers],
+      undoStack: pushUndo(state.undoStack, state.layers),
+      redoStack: [],
+      isDirty: true,
+    })),
 
   updateLayer: (index, partial) =>
     set((state) => {
