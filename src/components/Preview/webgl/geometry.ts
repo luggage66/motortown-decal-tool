@@ -9,7 +9,7 @@ import {
   ARROW_CONE_SEGMENTS,
 } from '../constants'
 import { Vec3, vec3, add, sub, scale, normalize, cross } from './math'
-import type { DecalLayer } from '../../types'
+import type { DecalLayer } from '../../../types'
 
 const DEG = Math.PI / 180
 const CAR_CENTER_Y = CAR_GROUND_CLEARANCE + CAR_HEIGHT / 2  // 80
