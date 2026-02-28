@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MotorTown Decal File",
+  "type": "object",
+  "required": ["decal"],
+  "additionalProperties": false,
+  "properties": {
+    "decal": {
+      "type": "object",
+      "required": ["decalLayers"],
+      "additionalProperties": false,
+      "properties": {
+        "decalLayers": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "required": [
+              "decalKey",
+              "color",
+              "position",
+              "rotation",
+              "decalScale",
+              "stretch",
+              "coverage",
+              "flags"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "decalKey": {
+                "type": "string",
+                "description": "The shape"
+              },
+              "color": {
+                "type": "object",
+                "required": ["r", "g", "b", "a"],
+                "additionalProperties": false,
+                "properties": {
+                  "r": { "type": "number", "minimum": 0, "maximum": 255 },
+                  "g": { "type": "number", "minimum": 0, "maximum": 255 },
+                  "b": { "type": "number", "minimum": 0, "maximum": 255 },
+                  "a": { "type": "number", "minimum": 0, "maximum": 255 }
+                }
+              },
+              "position": {
+                "type": "object",
+                "required": ["x", "y"],
+                "additionalProperties": false,
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" }
+                }
+              },
+              "rotation": {
+                "type": "object",
+                "required": ["pitch", "yaw", "roll"],
+                "additionalProperties": false,
+                "properties": {
+                  "pitch": { "type": "number" },
+                  "yaw": { "type": "number" },
+                  "roll": { "type": "number" }
+                }
+              },
+              "decalScale": { "type": "number" },
+              "stretch": { "type": "number" },
+              "coverage": { "type": "number" },
+              "flags": { "type": "integer" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
