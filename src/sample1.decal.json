@@ -1,0 +1,644 @@
+{
+    "decal": {
+        "decalLayers": [
+            {
+                "decalKey": "GeomShape_01_011-square",
+                "color": {
+                    "b": 0,
+                    "g": 189,
+                    "r": 235,
+                    "a": 255
+                },
+                "position": {
+                    "x": -32.103297158998984,
+                    "y": 37.86449699422851
+                },
+                "rotation": {
+                    "pitch": 341.9110107421875,
+                    "yaw": 83.0291748046875,
+                    "roll": 0
+                },
+                "decalScale": 2.6958169937133789,
+                "stretch": 1,
+                "coverage": 1,
+                "flags": 0
+            },
+            {
+                "decalKey": "GeomShape_01_005-trapezium",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 255,
+                    "a": 255
+                },
+                "position": {
+                    "x": -134.58651777045685,
+                    "y": 36.776095903106594
+                },
+                "rotation": {
+                    "pitch": 4.7625732421875,
+                    "yaw": 91.8402099609375,
+                    "roll": 0
+                },
+                "decalScale": 0.5,
+                "stretch": 1.625510573387146,
+                "coverage": 1,
+                "flags": 14
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 255,
+                    "a": 255
+                },
+                "position": {
+                    "x": 53.054841903348198,
+                    "y": 41.790100602950076
+                },
+                "rotation": {
+                    "pitch": 7.0147705078125,
+                    "yaw": 92.0928955078125,
+                    "roll": 0
+                },
+                "decalScale": 0.5,
+                "stretch": 3.0564403533935547,
+                "coverage": 1,
+                "flags": 14
+            },
+            {
+                "decalKey": "GeomShape_01_005-trapezium",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 255,
+                    "a": 255
+                },
+                "position": {
+                    "x": 156.31922182085847,
+                    "y": 80.994565850002061
+                },
+                "rotation": {
+                    "pitch": 352.177734375,
+                    "yaw": 86.2042236328125,
+                    "roll": 0
+                },
+                "decalScale": 0.94192737340927124,
+                "stretch": 1.2456235885620117,
+                "coverage": 1,
+                "flags": 10
+            },
+            {
+                "decalKey": "GeomShape_01_005-trapezium",
+                "color": {
+                    "b": 255,
+                    "g": 255,
+                    "r": 255,
+                    "a": 255
+                },
+                "position": {
+                    "x": 243.80356144550183,
+                    "y": 80.994565850002061
+                },
+                "rotation": {
+                    "pitch": 352.177734375,
+                    "yaw": 86.2042236328125,
+                    "roll": 0
+                },
+                "decalScale": 0.94192737340927124,
+                "stretch": 1.2456235885620117,
+                "coverage": 1,
+                "flags": 10
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 255,
+                    "g": 255,
+                    "r": 255,
+                    "a": 255
+                },
+                "position": {
+                    "x": 53.054841903348198,
+                    "y": 33.549710033978442
+                },
+                "rotation": {
+                    "pitch": 7.0147705078125,
+                    "yaw": 92.0928955078125,
+                    "roll": 0
+                },
+                "decalScale": 0.5,
+                "stretch": 3.0564403533935547,
+                "coverage": 1,
+                "flags": 14
+            },
+            {
+                "decalKey": "GeomShape_01_005-trapezium",
+                "color": {
+                    "b": 255,
+                    "g": 255,
+                    "r": 255,
+                    "a": 255
+                },
+                "position": {
+                    "x": -134.42602816657978,
+                    "y": 26.081225177832508
+                },
+                "rotation": {
+                    "pitch": 4.7625732421875,
+                    "yaw": 91.8402099609375,
+                    "roll": 0
+                },
+                "decalScale": 0.5,
+                "stretch": 1.625510573387146,
+                "coverage": 1,
+                "flags": 14
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 125,
+                    "g": 60,
+                    "r": 9,
+                    "a": 255
+                },
+                "position": {
+                    "x": 53.054841903348198,
+                    "y": 30.612619264568309
+                },
+                "rotation": {
+                    "pitch": 7.0147705078125,
+                    "yaw": 92.0928955078125,
+                    "roll": 0
+                },
+                "decalScale": 0.5,
+                "stretch": 3.0564403533935547,
+                "coverage": 1,
+                "flags": 14
+            },
+            {
+                "decalKey": "GeomShape_01_005-trapezium",
+                "color": {
+                    "b": 125,
+                    "g": 60,
+                    "r": 9,
+                    "a": 255
+                },
+                "position": {
+                    "x": 247.99920205417015,
+                    "y": 80.994565850002061
+                },
+                "rotation": {
+                    "pitch": 352.177734375,
+                    "yaw": 86.2042236328125,
+                    "roll": 0
+                },
+                "decalScale": 0.94192737340927124,
+                "stretch": 1.2456235885620117,
+                "coverage": 1,
+                "flags": 10
+            },
+            {
+                "decalKey": "Animals_01_Llama",
+                "color": {
+                    "b": 18,
+                    "g": 156,
+                    "r": 243,
+                    "a": 255
+                },
+                "position": {
+                    "x": 105.05306336219913,
+                    "y": 101.24724422182243
+                },
+                "rotation": {
+                    "pitch": 3.4222412109375,
+                    "yaw": 89.6044921875,
+                    "roll": 0
+                },
+                "decalScale": 0.095057755708694458,
+                "stretch": 1,
+                "coverage": 1,
+                "flags": 266
+            },
+            {
+                "decalKey": "GeomShape_01_005-trapezium",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": -10.209772251158991,
+                    "y": 5.9096825759057268
+                },
+                "rotation": {
+                    "pitch": 294.9169921875,
+                    "yaw": 89.6649169921875,
+                    "roll": 0
+                },
+                "decalScale": 0.088973790407180786,
+                "stretch": 1,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": -26.226389660120756,
+                    "y": 5.9096825759057268
+                },
+                "rotation": {
+                    "pitch": 294.9169921875,
+                    "yaw": 89.6649169921875,
+                    "roll": 0
+                },
+                "decalScale": 0.096016108989715576,
+                "stretch": 0.18855515122413635,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": -36.94037017073488,
+                    "y": 18.537864331729864
+                },
+                "rotation": {
+                    "pitch": 298.1854248046875,
+                    "yaw": 270.0439453125,
+                    "roll": 0
+                },
+                "decalScale": 0.028981966897845268,
+                "stretch": 2.074704647064209,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_012-triangle",
+                "color": {
+                    "b": 0,
+                    "g": 189,
+                    "r": 235,
+                    "a": 255
+                },
+                "position": {
+                    "x": -10.369304001962032,
+                    "y": 27.656533498390196
+                },
+                "rotation": {
+                    "pitch": 305.5682373046875,
+                    "yaw": 89.49462890625,
+                    "roll": 0
+                },
+                "decalScale": 0.023620350286364555,
+                "stretch": 1,
+                "coverage": 1,
+                "flags": 12
+            },
+            {
+                "decalKey": "GeomShape_01_012-triangle",
+                "color": {
+                    "b": 0,
+                    "g": 189,
+                    "r": 235,
+                    "a": 255
+                },
+                "position": {
+                    "x": -14.820139759864887,
+                    "y": 25.839821916080972
+                },
+                "rotation": {
+                    "pitch": 301.97021484375,
+                    "yaw": 89.197998046875,
+                    "roll": 0
+                },
+                "decalScale": 0.03095882385969162,
+                "stretch": 0.74319553375244141,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_012-triangle",
+                "color": {
+                    "b": 0,
+                    "g": 189,
+                    "r": 235,
+                    "a": 255
+                },
+                "position": {
+                    "x": -6.319270806142911,
+                    "y": 37.175010090228739
+                },
+                "rotation": {
+                    "pitch": 306.968994140625,
+                    "yaw": 89.263916015625,
+                    "roll": 0
+                },
+                "decalScale": 0.03095882385969162,
+                "stretch": 0.74319553375244141,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": 5.4810658191204151,
+                    "y": 13.662813486248098
+                },
+                "rotation": {
+                    "pitch": 300.1190185546875,
+                    "yaw": 89.2144775390625,
+                    "roll": 0
+                },
+                "decalScale": 0.028981966897845268,
+                "stretch": 1.4802299737930298,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": 1.8799700897442035,
+                    "y": 3.6777931571965539
+                },
+                "rotation": {
+                    "pitch": 294.0216064453125,
+                    "yaw": 89.241943359375,
+                    "roll": 0
+                },
+                "decalScale": 0.096016108989715576,
+                "stretch": 0.18855515122413635,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "Numbers_01_066-66",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": 27.795786997054563,
+                    "y": 17.623722491989334
+                },
+                "rotation": {
+                    "pitch": 300.0750732421875,
+                    "yaw": 88.868408203125,
+                    "roll": 0
+                },
+                "decalScale": 0.1028222069144249,
+                "stretch": 1,
+                "coverage": 1,
+                "flags": 12
+            },
+            {
+                "decalKey": "GeomShape_01_005-trapezium",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": -19.660756094258943,
+                    "y": 24.169033490121095
+                },
+                "rotation": {
+                    "pitch": 302.5360107421875,
+                    "yaw": 270.3240966796875,
+                    "roll": 0
+                },
+                "decalScale": 0.088973790407180786,
+                "stretch": 1,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "Numbers_01_066-66",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": 19.041380938371496,
+                    "y": 5.8039796453262227
+                },
+                "rotation": {
+                    "pitch": 294.63134765625,
+                    "yaw": 269.923095703125,
+                    "roll": 0
+                },
+                "decalScale": 0.10229755938053131,
+                "stretch": 1,
+                "coverage": 1,
+                "flags": 12
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": -35.863132082192301,
+                    "y": 25.762672989660032
+                },
+                "rotation": {
+                    "pitch": 303.4368896484375,
+                    "yaw": 270.758056640625,
+                    "roll": 0
+                },
+                "decalScale": 0.096016108989715576,
+                "stretch": 0.18855515122413635,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": -6.3766669175215931,
+                    "y": -2.3046764595921445
+                },
+                "rotation": {
+                    "pitch": 291.4398193359375,
+                    "yaw": 270.9613037109375,
+                    "roll": 0
+                },
+                "decalScale": 0.096016108989715576,
+                "stretch": 0.18855515122413635,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": -3.2504985388383378,
+                    "y": 6.6971533282317992
+                },
+                "rotation": {
+                    "pitch": 296.982421875,
+                    "yaw": 269.769287109375,
+                    "roll": 0
+                },
+                "decalScale": 0.028981966897845268,
+                "stretch": 1.4802299737930298,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_002-rectangle",
+                "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0,
+                    "a": 255
+                },
+                "position": {
+                    "x": -27.476434877863461,
+                    "y": 3.9345068996196488
+                },
+                "rotation": {
+                    "pitch": 291.97265625,
+                    "yaw": 88.87939453125,
+                    "roll": 0
+                },
+                "decalScale": 0.028981966897845268,
+                "stretch": 2.074704647064209,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_012-triangle",
+                "color": {
+                    "b": 0,
+                    "g": 189,
+                    "r": 235,
+                    "a": 255
+                },
+                "position": {
+                    "x": -19.596724394357047,
+                    "y": -2.3816823733973251
+                },
+                "rotation": {
+                    "pitch": 293.082275390625,
+                    "yaw": 270.1153564453125,
+                    "roll": 0
+                },
+                "decalScale": 0.023620350286364555,
+                "stretch": 1,
+                "coverage": 1,
+                "flags": 12
+            },
+            {
+                "decalKey": "GeomShape_01_012-triangle",
+                "color": {
+                    "b": 0,
+                    "g": 189,
+                    "r": 235,
+                    "a": 255
+                },
+                "position": {
+                    "x": -24.766258024923836,
+                    "y": 28.286525045475017
+                },
+                "rotation": {
+                    "pitch": 302.7777099609375,
+                    "yaw": 269.219970703125,
+                    "roll": 0
+                },
+                "decalScale": 0.03095882385969162,
+                "stretch": 0.74319553375244141,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "GeomShape_01_012-triangle",
+                "color": {
+                    "b": 0,
+                    "g": 189,
+                    "r": 235,
+                    "a": 255
+                },
+                "position": {
+                    "x": -14.356642989433611,
+                    "y": 31.462132053645185
+                },
+                "rotation": {
+                    "pitch": 304.4915771484375,
+                    "yaw": 271.5435791015625,
+                    "roll": 0
+                },
+                "decalScale": 0.03095882385969162,
+                "stretch": 0.74319553375244141,
+                "coverage": 1,
+                "flags": 13
+            },
+            {
+                "decalKey": "Ambulance_01_Ambulance_decal_2",
+                "color": {
+                    "b": 255,
+                    "g": 255,
+                    "r": 255,
+                    "a": 255
+                },
+                "position": {
+                    "x": -9.3044105053051265,
+                    "y": 62.902363779697211
+                },
+                "rotation": {
+                    "pitch": 355.9954833984375,
+                    "yaw": 357.6873779296875,
+                    "roll": 0
+                },
+                "decalScale": 0.36756372451782227,
+                "stretch": 1.4866925477981567,
+                "coverage": 1,
+                "flags": 264
+            }
+        ]
+    }
+}

@@ -7,14 +7,14 @@ import {
   ARROW_CONE_LENGTH,
   ARROW_CONE_RADIUS,
   ARROW_CONE_SEGMENTS,
+  CAMERA_TARGET_Y,
 } from "../constants";
 import { Vec3, vec3, add, sub, scale, normalize, cross } from "./math";
 import type { DecalLayer } from "../../../types";
 
 const DEG = Math.PI / 180;
-const CAR_CENTER_Y = CAR_GROUND_CLEARANCE + CAR_HEIGHT / 2; // 80
 const UP: Vec3 = [0, 1, 0];
-const CAR_CENTER: Vec3 = [0, CAR_CENTER_Y, 0];
+const CAR_CENTER: Vec3 = [0, CAMERA_TARGET_Y, 0];
 
 // ---------------------------------------------------------------------------
 // Car box — 12 triangles (6 faces × 2), interleaved xyz
@@ -114,6 +114,33 @@ export function buildCarBoxWireframe(): CarFace[] {
       lineVerts: new Float32Array(verts),
     };
   });
+}
+
+// ---------------------------------------------------------------------------
+// Ground plane — solid fill quad + grid lines at y = 0
+// ---------------------------------------------------------------------------
+
+const GROUND_HALF = 400; // world units from center to edge
+const GROUND_STEP = 100; // grid line spacing
+
+export function buildGroundPlane(): Float32Array {
+  const s = GROUND_HALF;
+  // Two triangles covering the XZ plane at y = 0
+  return new Float32Array([
+    -s, 0, -s,  s, 0, -s,  s, 0,  s,
+    -s, 0, -s,  s, 0,  s, -s, 0,  s,
+  ]);
+}
+
+export function buildGroundGrid(): Float32Array {
+  const verts: number[] = [];
+  for (let v = -GROUND_HALF; v <= GROUND_HALF; v += GROUND_STEP) {
+    // line parallel to Z
+    verts.push(v, 0, -GROUND_HALF, v, 0, GROUND_HALF);
+    // line parallel to X
+    verts.push(-GROUND_HALF, 0, v, GROUND_HALF, 0, v);
+  }
+  return new Float32Array(verts);
 }
 
 // ---------------------------------------------------------------------------

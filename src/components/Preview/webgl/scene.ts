@@ -5,6 +5,7 @@ import {
   CAR_BOX_OPACITY,
   CAR_WIREFRAME_OPACITY,
   ARROW_CONE_LENGTH,
+  CAMERA_TARGET_Y,
 } from "../constants";
 import {
   Vec3,
@@ -22,6 +23,8 @@ import {
   buildCarBox,
   buildArrow,
   buildCarBoxWireframe,
+  buildGroundPlane,
+  buildGroundGrid,
   computeArrowGeometry,
 } from "./geometry";
 
@@ -83,6 +86,17 @@ export function initScene(
     return vbo;
   });
 
+  const groundPlaneData = buildGroundPlane();
+  const groundPlaneVbo = gl.createBuffer()!;
+  gl.bindBuffer(gl.ARRAY_BUFFER, groundPlaneVbo);
+  gl.bufferData(gl.ARRAY_BUFFER, groundPlaneData, gl.STATIC_DRAW);
+
+  const groundGridData = buildGroundGrid();
+  const groundGridVbo = gl.createBuffer()!;
+  gl.bindBuffer(gl.ARRAY_BUFFER, groundGridVbo);
+  gl.bufferData(gl.ARRAY_BUFFER, groundGridData, gl.STATIC_DRAW);
+  const groundGridVertCount = groundGridData.length / 3;
+
   // -------------------------------------------------------------------------
   // GL state
   // -------------------------------------------------------------------------
@@ -124,7 +138,21 @@ export function initScene(
   let azimuth = -135 * DEG;
   let elevation = 30 * DEG;
   let distance = 800;
-  const target: Vec3 = [0, 80, 0];
+  const target: Vec3 = [0, CAMERA_TARGET_Y, 0];
+
+  // Origin marker — small 3D crosshair at the camera pivot point
+  const ORIGIN_ARM = 25;
+  const originMarkerData = new Float32Array([
+    target[0] - ORIGIN_ARM, target[1], target[2],
+    target[0] + ORIGIN_ARM, target[1], target[2],
+    target[0], target[1] - ORIGIN_ARM, target[2],
+    target[0], target[1] + ORIGIN_ARM, target[2],
+    target[0], target[1], target[2] - ORIGIN_ARM,
+    target[0], target[1], target[2] + ORIGIN_ARM,
+  ]);
+  const originMarkerVbo = gl.createBuffer()!;
+  gl.bindBuffer(gl.ARRAY_BUFFER, originMarkerVbo);
+  gl.bufferData(gl.ARRAY_BUFFER, originMarkerData, gl.STATIC_DRAW);
 
   function cameraEye(): Vec3 {
     return [
@@ -207,10 +235,24 @@ export function initScene(
     gl.uniformMatrix4fv(uMvp, false, vp);
     gl.enableVertexAttribArray(aPosition);
 
-    // 1. Car box + wireframe — depth write off so arrows behind it stay visible
+    // 1. Ground plane + grid, then car box + wireframe — depth write off so arrows behind stay visible
     gl.depthMask(false);
 
-    // solid fill
+    // ground fill
+    gl.uniform3f(uColor, 0.4, 0.4, 0.4);
+    gl.uniform1f(uOpacity, 0.12);
+    gl.bindBuffer(gl.ARRAY_BUFFER, groundPlaneVbo);
+    gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
+    gl.drawArrays(gl.TRIANGLES, 0, groundPlaneData.length / 3);
+
+    // ground grid
+    gl.uniform3f(uColor, 1, 1, 1);
+    gl.uniform1f(uOpacity, 0.18);
+    gl.bindBuffer(gl.ARRAY_BUFFER, groundGridVbo);
+    gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
+    gl.drawArrays(gl.LINES, 0, groundGridVertCount);
+
+    // car solid fill
     gl.uniform3f(uColor, 0.5, 0.5, 0.5);
     gl.uniform1f(uOpacity, CAR_BOX_OPACITY);
     gl.bindBuffer(gl.ARRAY_BUFFER, carBoxVbo);
@@ -256,6 +298,15 @@ export function initScene(
       gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
       gl.drawArrays(gl.TRIANGLES, 0, c.coneCount);
     }
+
+    // Origin marker — draw last, always on top
+    gl.disable(gl.DEPTH_TEST);
+    gl.uniform3f(uColor, 1.0, 0.65, 0.0);
+    gl.uniform1f(uOpacity, 0.9);
+    gl.bindBuffer(gl.ARRAY_BUFFER, originMarkerVbo);
+    gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
+    gl.drawArrays(gl.LINES, 0, 6); // 3 axes × 2 endpoints
+    gl.enable(gl.DEPTH_TEST);
 
     gl.disableVertexAttribArray(aPosition);
   }
@@ -423,6 +474,9 @@ export function initScene(
       }
       for (const vbo of carFaceVbos) gl.deleteBuffer(vbo);
       gl.deleteBuffer(carBoxVbo);
+      gl.deleteBuffer(groundPlaneVbo);
+      gl.deleteBuffer(groundGridVbo);
+      gl.deleteBuffer(originMarkerVbo);
       gl.deleteProgram(program);
     },
   };
