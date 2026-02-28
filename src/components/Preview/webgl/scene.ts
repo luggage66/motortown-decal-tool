@@ -1,4 +1,4 @@
-import type { DecalLayer } from '../../types'
+import type { DecalLayer } from '../../../types';
 import {
   ARROW_OPACITY_ACTIVE,
   ARROW_OPACITY_DIMMED,
@@ -47,7 +47,7 @@ export function initScene(
   canvas: HTMLCanvasElement,
   opts: { onSelect: (index: number | null) => void },
 ): SceneHandle {
-  const gl = canvas.getContext('webgl', { antialias: true, alpha: true })
+  const gl = canvas.getContext('webgl', { antialias: true, alpha: true })!
   if (!gl) throw new Error('WebGL not supported')
 
   // -------------------------------------------------------------------------
