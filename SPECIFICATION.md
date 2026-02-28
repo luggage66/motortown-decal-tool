@@ -43,19 +43,19 @@ The app imports and exports JSON with this structure:
 
 ### 3.2 Field Definitions & Constraints
 
-| Field | Type | Input Widget | Notes |
-|---|---|---|---|
-| `decalKey` | string | React Spectrum ComboBox (searchable) | Options populated from unique keys found in the imported JSON |
-| `color` | RGBA object | Rich color picker (HSL/RGB sliders, hex input, alpha slider) | Each channel 0–255 |
-| `position.x` | float | React Spectrum NumberField | Unbounded, step 0.1 |
-| `position.y` | float | React Spectrum NumberField | Unbounded, step 0.1 |
-| `rotation.pitch` | float | React Spectrum NumberField | Unbounded, step 0.1 |
-| `rotation.yaw` | float | React Spectrum NumberField | Unbounded, step 0.1 |
-| `rotation.roll` | float | React Spectrum NumberField | Unbounded, step 0.1 |
-| `decalScale` | float | React Spectrum Slider + NumberField | Range: 0.0–10.0, step 0.01 |
-| `stretch` | float | React Spectrum Slider + NumberField | Range: 0.0–10.0, step 0.01 |
-| `coverage` | float | React Spectrum Slider + NumberField | Range: 0.0–1.0, step 0.01 |
-| `flags` | integer | NumberField + toggle checkboxes for individual bits | See §6 |
+| Field            | Type        | Input Widget                                                 | Notes                                                         |
+| ---------------- | ----------- | ------------------------------------------------------------ | ------------------------------------------------------------- |
+| `decalKey`       | string      | React Spectrum ComboBox (searchable)                         | Options populated from unique keys found in the imported JSON |
+| `color`          | RGBA object | Rich color picker (HSL/RGB sliders, hex input, alpha slider) | Each channel 0–255                                            |
+| `position.x`     | float       | React Spectrum NumberField                                   | Unbounded, step 0.1                                           |
+| `position.y`     | float       | React Spectrum NumberField                                   | Unbounded, step 0.1                                           |
+| `rotation.pitch` | float       | React Spectrum NumberField                                   | Unbounded, step 0.1                                           |
+| `rotation.yaw`   | float       | React Spectrum NumberField                                   | Unbounded, step 0.1                                           |
+| `rotation.roll`  | float       | React Spectrum NumberField                                   | Unbounded, step 0.1                                           |
+| `decalScale`     | float       | React Spectrum Slider + NumberField                          | Range: 0.0–10.0, step 0.01                                    |
+| `stretch`        | float       | React Spectrum Slider + NumberField                          | Range: 0.0–10.0, step 0.01                                    |
+| `coverage`       | float       | React Spectrum Slider + NumberField                          | Range: 0.0–1.0, step 0.01                                     |
+| `flags`          | integer     | NumberField + toggle checkboxes for individual bits          | See §6                                                        |
 
 ### 3.3 Layer Cap
 
