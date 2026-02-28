@@ -5,6 +5,7 @@ import { EditorHeader } from './components/EditorHeader'
 import { Sidebar } from './components/Sidebar'
 import { LayerList } from './components/LayerList'
 import { JsonEditor } from './components/JsonEditor'
+import { Preview } from './components/Preview/Preview'
 import { useStore } from './store'
 import styles from './App.module.css'
 
@@ -56,9 +57,7 @@ function App() {
                 <TabPanels UNSAFE_className={styles.tabPanels}>
                   <Item key="layers"><LayerList /></Item>
                   <Item key="json"><JsonEditor /></Item>
-                  <Item key="preview">
-                    <div className={styles.placeholder}>Preview coming probably never</div>
-                  </Item>
+                  <Item key="preview"><Preview /></Item>
                 </TabPanels>
               </Tabs>
             </main>

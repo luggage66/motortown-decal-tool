@@ -7,8 +7,10 @@ interface DecalState {
   undoStack: DecalLayer[][]
   redoStack: DecalLayer[][]
   isDirty: boolean
+  selectedLayerIndex: number | null
 
   importLayers: (layers: DecalLayer[]) => void
+  setSelectedLayer: (index: number | null) => void
   updateLayer: (index: number, partial: Partial<DecalLayer>) => void
   addLayer: () => void
   duplicateLayer: (index: number) => void
@@ -36,6 +38,9 @@ export const useStore = create<DecalState>((set) => ({
   undoStack: [],
   redoStack: [],
   isDirty: false,
+  selectedLayerIndex: null,
+
+  setSelectedLayer: (index) => set({ selectedLayerIndex: index }),
 
   importLayers: (layers) =>
     set({
