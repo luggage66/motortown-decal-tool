@@ -1,4 +1,10 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npx tsc --noEmit)"
+    ]
+  },
   "hooks": {
     "PostToolUse": [
       {
@@ -10,14 +16,6 @@
           }
         ]
       }
-    ]
-  },
-  "permissions": {
-    "additionalDirectories": [
-      "/Users/dmull/personal/motortown-decal-tool/src"
-    ],
-    "allow": [
-      "Bash(npm run build)"
     ]
   }
 }
