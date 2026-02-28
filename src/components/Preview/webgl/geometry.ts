@@ -127,8 +127,24 @@ export function buildGroundPlane(): Float32Array {
   const s = GROUND_HALF;
   // Two triangles covering the XZ plane at y = 0
   return new Float32Array([
-    -s, 0, -s,  s, 0, -s,  s, 0,  s,
-    -s, 0, -s,  s, 0,  s, -s, 0,  s,
+    -s,
+    0,
+    -s,
+    s,
+    0,
+    -s,
+    s,
+    0,
+    s,
+    -s,
+    0,
+    -s,
+    s,
+    0,
+    s,
+    -s,
+    0,
+    s,
   ]);
 }
 

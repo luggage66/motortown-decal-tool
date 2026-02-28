@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RgbaColorPicker, HslaColorPicker } from "react-colorful";
 import type { RgbaColor, HslaColor } from "react-colorful";
-import { NumberField, TextField } from "@adobe/react-spectrum";
+import { NumberField, TextField } from "@react-spectrum/s2";
 import type { DecalColor } from "../types";
 import {
   toPickerRgba,
@@ -94,7 +94,6 @@ export function ColorPicker({ color, onChange }: ColorPickerProps) {
         onKeyDown={(e) => {
           if (e.key === "Enter") commitHex();
         }}
-        width="100%"
       />
 
       <div className={styles.channels}>
@@ -106,7 +105,6 @@ export function ColorPicker({ color, onChange }: ColorPickerProps) {
           maxValue={255}
           step={1}
           onChange={(v) => handleChannel("r", v)}
-          width="size-900"
         />
         <NumberField
           label="G"
@@ -116,7 +114,6 @@ export function ColorPicker({ color, onChange }: ColorPickerProps) {
           maxValue={255}
           step={1}
           onChange={(v) => handleChannel("g", v)}
-          width="size-900"
         />
         <NumberField
           label="B"
@@ -126,7 +123,6 @@ export function ColorPicker({ color, onChange }: ColorPickerProps) {
           maxValue={255}
           step={1}
           onChange={(v) => handleChannel("b", v)}
-          width="size-900"
         />
         <NumberField
           label="A"
@@ -136,7 +132,6 @@ export function ColorPicker({ color, onChange }: ColorPickerProps) {
           maxValue={255}
           step={1}
           onChange={(v) => handleChannel("a", v)}
-          width="size-900"
         />
       </div>
     </div>

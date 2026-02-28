@@ -247,7 +247,7 @@ Matches the spec skeleton. Uses React Spectrum `ToggleButtonGroup` (or two
 `ToggleButton` elements) for the All / Selected toggle in the toolbar.
 
 ```tsx
-import { ToggleButton } from "@adobe/react-spectrum";
+import { ToggleButton } from "@react-spectrum/s2";
 ```
 
 Canvas gets `width` / `height` set by the ResizeObserver inside `scene.ts`
@@ -268,7 +268,6 @@ Canvas gets `width` / `height` set by the ResizeObserver inside `scene.ts`
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  border-bottom: 1px solid var(--spectrum-global-color-gray-200);
 }
 .canvas {
   flex: 1;

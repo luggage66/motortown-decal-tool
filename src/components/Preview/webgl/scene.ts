@@ -143,12 +143,24 @@ export function initScene(
   // Origin marker — small 3D crosshair at the camera pivot point
   const ORIGIN_ARM = 25;
   const originMarkerData = new Float32Array([
-    target[0] - ORIGIN_ARM, target[1], target[2],
-    target[0] + ORIGIN_ARM, target[1], target[2],
-    target[0], target[1] - ORIGIN_ARM, target[2],
-    target[0], target[1] + ORIGIN_ARM, target[2],
-    target[0], target[1], target[2] - ORIGIN_ARM,
-    target[0], target[1], target[2] + ORIGIN_ARM,
+    target[0] - ORIGIN_ARM,
+    target[1],
+    target[2],
+    target[0] + ORIGIN_ARM,
+    target[1],
+    target[2],
+    target[0],
+    target[1] - ORIGIN_ARM,
+    target[2],
+    target[0],
+    target[1] + ORIGIN_ARM,
+    target[2],
+    target[0],
+    target[1],
+    target[2] - ORIGIN_ARM,
+    target[0],
+    target[1],
+    target[2] + ORIGIN_ARM,
   ]);
   const originMarkerVbo = gl.createBuffer()!;
   gl.bindBuffer(gl.ARRAY_BUFFER, originMarkerVbo);

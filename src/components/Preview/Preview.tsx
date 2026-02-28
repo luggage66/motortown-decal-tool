@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ToggleButton } from "@adobe/react-spectrum";
+import { ToggleButton } from "@react-spectrum/s2";
 import { useStore } from "../../store";
 import { initScene } from "./webgl/scene";
 import type { SceneHandle } from "./webgl/scene";

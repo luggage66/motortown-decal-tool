@@ -1,5 +1,5 @@
 import { useRef, useState, useMemo } from "react";
-import { Button } from "@adobe/react-spectrum";
+import { Button } from "@react-spectrum/s2";
 import { useStore } from "../store";
 import { LayerCard } from "./LayerCard";
 import styles from "./LayerList.module.css";

@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import {
   Provider,
-  darkTheme,
   ToastContainer,
   Tabs,
+  Tab,
   TabList,
-  TabPanels,
-  Item,
-} from "@adobe/react-spectrum";
+  TabPanel,
+} from "@react-spectrum/s2";
 import { UploadScreen } from "./components/UploadScreen";
 import { EditorHeader } from "./components/EditorHeader";
 import { Sidebar } from "./components/Sidebar";
@@ -16,6 +15,7 @@ import { JsonEditor } from "./components/JsonEditor";
 import { Preview } from "./components/Preview/Preview";
 import { useStore } from "./store";
 import styles from "./App.module.css";
+import { style } from "@react-spectrum/s2/style"with {type: 'macro'};
 
 function App() {
   const hasLayers = useStore((s) => s.layers.length > 0);
@@ -48,7 +48,7 @@ function App() {
   }, []);
 
   return (
-    <Provider theme={darkTheme} colorScheme="dark">
+    <Provider>
       <ToastContainer />
       {hasLayers ? (
         <div className={styles.editorLayout}>
@@ -56,23 +56,22 @@ function App() {
           <div className={styles.editorBody}>
             <Sidebar />
             <main className={styles.mainContent}>
-              <Tabs aria-label="Editor tabs" UNSAFE_className={styles.tabs}>
+              <Tabs aria-label="Editor tabs" styles={style({ height: "100%" })}>
                 <TabList>
-                  <Item key="layers">Layers</Item>
-                  <Item key="json">JSON</Item>
-                  <Item key="preview">Preview</Item>
+                  <Tab id="layers">Layers</Tab>
+                  <Tab id="json">JSON</Tab>
+                  <Tab id="preview">Preview</Tab>
                 </TabList>
-                <TabPanels UNSAFE_className={styles.tabPanels}>
-                  <Item key="layers">
-                    <LayerList />
-                  </Item>
-                  <Item key="json">
-                    <JsonEditor />
-                  </Item>
-                  <Item key="preview">
-                    <Preview />
-                  </Item>
-                </TabPanels>
+
+                <TabPanel id="layers">
+                  <LayerList />
+                </TabPanel>
+                <TabPanel id="json">
+                  <JsonEditor />
+                </TabPanel>
+                <TabPanel id="preview">
+                  <Preview />
+                </TabPanel>
               </Tabs>
             </main>
           </div>

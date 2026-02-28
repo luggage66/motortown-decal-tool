@@ -3,10 +3,10 @@ import {
   NumberField,
   Slider,
   ComboBox,
-  Item,
+  ComboBoxItem,
   Checkbox,
   ActionButton,
-} from "@adobe/react-spectrum";
+} from "@react-spectrum/s2";
 import { useStore } from "../store";
 import { ColorSwatch } from "./ColorSwatch";
 import { ColorPickerTrigger } from "./ColorPicker";
@@ -80,10 +80,9 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
             }
           }}
           allowsCustomValue
-          width="size-3000"
         >
           {uniqueKeys.map((k) => (
-            <Item key={k}>{k}</Item>
+            <ComboBoxItem key={k}>{k}</ComboBoxItem>
           ))}
         </ComboBox>
         <span className={styles.layerIndex}>#{index + 1}</span>
@@ -101,7 +100,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
           onChange={(v) =>
             guard(v, (v) => update({ position: { ...layer.position, x: v } }))
           }
-          width="size-1200"
         />
         <NumberField
           label="Y"
@@ -111,7 +109,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
           onChange={(v) =>
             guard(v, (v) => update({ position: { ...layer.position, y: v } }))
           }
-          width="size-1200"
         />
         <NumberField
           label="Pitch"
@@ -123,7 +120,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
               update({ rotation: { ...layer.rotation, pitch: v } }),
             )
           }
-          width="size-1200"
         />
         <NumberField
           label="Yaw"
@@ -133,7 +129,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
           onChange={(v) =>
             guard(v, (v) => update({ rotation: { ...layer.rotation, yaw: v } }))
           }
-          width="size-1200"
         />
         <NumberField
           label="Roll"
@@ -145,7 +140,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
               update({ rotation: { ...layer.rotation, roll: v } }),
             )
           }
-          width="size-1200"
         />
       </div>
 
@@ -173,7 +167,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
                 update({ decalScale: v });
               })
             }
-            width="size-900"
           />
         </div>
         <div className={styles.sliderGroup}>
@@ -198,7 +191,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
                 update({ stretch: v });
               })
             }
-            width="size-900"
           />
         </div>
         <div className={styles.sliderGroup}>
@@ -223,7 +215,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
                 update({ coverage: v });
               })
             }
-            width="size-900"
           />
         </div>
       </div>
@@ -237,7 +228,6 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
           step={1}
           minValue={0}
           onChange={(v) => guard(v, (v) => update({ flags: Math.round(v) }))}
-          width="size-1200"
         />
         <div className={styles.flagBits}>
           {Object.entries(FLAG_DEFINITIONS).map(([bit, _label]) => {

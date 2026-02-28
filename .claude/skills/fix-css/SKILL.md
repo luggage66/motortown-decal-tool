@@ -22,11 +22,11 @@ CSS custom properties from `src/index.css` are used for theming (e.g., `var(--te
 
 Read the `.tsx` file. Identify every `style={}` prop. Categorize each one:
 
-| Category | Example | Strategy |
-|---|---|---|
-| **Static styles** | `display: 'flex', gap: 8` | Move directly to CSS class |
-| **Conditional styles** (boolean toggle) | `outline: dragOverIndex === i ? '2px solid ...' : undefined` | Use a **data attribute** on the element and a CSS **attribute selector** |
-| **Dynamic values from props/state** | `width: size`, `backgroundColor: rgba(...)` | Use a **CSS custom property** set via `style={}`, with remaining static styles in the class |
+| Category                                | Example                                                      | Strategy                                                                                    |
+| --------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| **Static styles**                       | `display: 'flex', gap: 8`                                    | Move directly to CSS class                                                                  |
+| **Conditional styles** (boolean toggle) | `outline: dragOverIndex === i ? '2px solid ...' : undefined` | Use a **data attribute** on the element and a CSS **attribute selector**                    |
+| **Dynamic values from props/state**     | `width: size`, `backgroundColor: rgba(...)`                  | Use a **CSS custom property** set via `style={}`, with remaining static styles in the class |
 
 ### 2. Create or update the CSS module file
 
@@ -35,11 +35,13 @@ Create `src/components/ComponentName.module.css` if it doesn't exist. If it alre
 ### 3. Extract static styles
 
 Before:
+
 ```tsx
 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
 ```
 
 After — CSS:
+
 ```css
 .list {
   display: flex;
@@ -49,6 +51,7 @@ After — CSS:
 ```
 
 After — TSX:
+
 ```tsx
 import styles from './ComponentName.module.css'
 // ...
@@ -62,6 +65,7 @@ import styles from './ComponentName.module.css'
 When a style is toggled by a JS condition (like drag-over, selected, active states), use a `data-*` attribute instead of computing the style inline.
 
 Before:
+
 ```tsx
 const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
 // ...
@@ -75,6 +79,7 @@ const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
 ```
 
 After — TSX:
+
 ```tsx
 <div
   className={styles.layerWrapper}
@@ -83,6 +88,7 @@ After — TSX:
 ```
 
 After — CSS:
+
 ```css
 .layerWrapper {
   display: flex;
@@ -103,6 +109,7 @@ After — CSS:
 When a value truly depends on a JS variable (prop, computed value), set it as a CSS custom property via a minimal inline `style`, and reference it in the CSS class.
 
 Before:
+
 ```tsx
 <div style={{
   width: size,
@@ -115,6 +122,7 @@ Before:
 ```
 
 After — TSX:
+
 ```tsx
 <div
   className={styles.swatch}
@@ -124,6 +132,7 @@ After — TSX:
 ```
 
 After — CSS:
+
 ```css
 .swatch {
   width: var(--swatch-size);

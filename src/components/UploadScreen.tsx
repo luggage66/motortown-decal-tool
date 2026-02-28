@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { Button, ToastQueue } from "@adobe/react-spectrum";
+import { Button, ToastQueue } from "@react-spectrum/s2";
 import { useStore } from "../store";
 import { validateDecalJson } from "../utils/validation";
 import styles from "./UploadScreen.module.css";

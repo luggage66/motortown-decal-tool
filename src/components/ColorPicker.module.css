@@ -19,13 +19,9 @@
   border: none;
   border-radius: 3px;
   background: transparent;
-  color: var(--text-secondary);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition:
-    background 0.15s,
-    color 0.15s;
 }
 
 .modeBtn:hover {

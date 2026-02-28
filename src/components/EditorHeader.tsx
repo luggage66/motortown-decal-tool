@@ -6,9 +6,10 @@ import {
   DialogTrigger,
   MenuTrigger,
   Menu,
-  Item,
+  MenuItem,
+  Text,
   ToastQueue,
-} from "@adobe/react-spectrum";
+} from "@react-spectrum/s2";
 import { saveAs } from "file-saver";
 import { useStore } from "../store";
 import { validateDecalJson } from "../utils/validation";
@@ -131,8 +132,13 @@ export function EditorHeader() {
         <MenuTrigger>
           <ActionButton isQuiet>Append JSON ▾</ActionButton>
           <Menu onAction={handleAppendMenuAction}>
-            <Item key="file">From File…</Item>
-            <Item key="clipboard">From Clipboard</Item>
+            <MenuItem key="file">
+              <Text slot="label">From File…</Text>
+            </MenuItem>
+
+            <MenuItem key="clipboard">
+              <Text slot="label">From Clipboard</Text>
+            </MenuItem>
           </Menu>
         </MenuTrigger>
         <input
