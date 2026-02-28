@@ -28,24 +28,25 @@ Create `src/components/Preview/constants.ts` with all geometry and render
 constants from the spec:
 
 ```ts
-export const CAR_LENGTH            = 500
-export const CAR_WIDTH             = 140
-export const CAR_HEIGHT            = 100
-export const CAR_GROUND_CLEARANCE  = 30
+export const CAR_LENGTH = 500;
+export const CAR_WIDTH = 140;
+export const CAR_HEIGHT = 100;
+export const CAR_GROUND_CLEARANCE = 30;
 
-export const ARROW_LENGTH          = 250
-export const ARROW_CONE_LENGTH     = 20
-export const ARROW_CONE_RADIUS     = 8
-export const ARROW_CONE_SEGMENTS   = 8
+export const ARROW_LENGTH = 250;
+export const ARROW_CONE_LENGTH = 20;
+export const ARROW_CONE_RADIUS = 8;
+export const ARROW_CONE_SEGMENTS = 8;
 
-export const ARROW_OPACITY_ACTIVE  = 1.0
-export const ARROW_OPACITY_DIMMED  = 0.08
-export const CAR_BOX_OPACITY       = 0.25
+export const ARROW_OPACITY_ACTIVE = 1.0;
+export const ARROW_OPACITY_DIMMED = 0.08;
+export const CAR_BOX_OPACITY = 0.25;
 ```
 
 Derived constants (computed once, not exported):
+
 ```ts
-const CAR_CENTER_Y = CAR_GROUND_CLEARANCE + CAR_HEIGHT / 2  // 80
+const CAR_CENTER_Y = CAR_GROUND_CLEARANCE + CAR_HEIGHT / 2; // 80
 ```
 
 ---
@@ -55,10 +56,12 @@ const CAR_CENTER_Y = CAR_GROUND_CLEARANCE + CAR_HEIGHT / 2  // 80
 Minimal Vec3/Mat4 library. Only what the scene actually needs:
 
 **Vec3 operations**
+
 - `vec3(x, y, z)` — typed array or plain object, whichever is simplest
 - `add`, `sub`, `scale`, `normalize`, `dot`, `cross`, `length`
 
 **Mat4 operations**
+
 - `identity()`, `multiply(a, b)`
 - `perspective(fovY, aspect, near, far)`
 - `lookAt(eye, target, up)`
@@ -72,6 +75,7 @@ All functions return new values; no mutation. Plain `Float32Array` or simple
 ## Step 4 — GLSL shaders (`webgl/shaders.ts`)
 
 Single shader program handles both the car box and arrows. Uniforms:
+
 - `u_mvp` — `mat4` model-view-projection
 - `u_color` — `vec3` base color
 - `u_opacity` — `float`
@@ -105,6 +109,7 @@ descriptive error on failure.
 
 Returns interleaved vertex positions (x, y, z) for 12 triangles (6 faces × 2
 triangles each). Vertices derived from:
+
 ```
 min = (-CAR_WIDTH/2, CAR_GROUND_CLEARANCE, -CAR_LENGTH/2)
 max = ( CAR_WIDTH/2, CAR_GROUND_CLEARANCE + CAR_HEIGHT, CAR_LENGTH/2)
@@ -118,6 +123,7 @@ max = ( CAR_WIDTH/2, CAR_GROUND_CLEARANCE + CAR_HEIGHT, CAR_LENGTH/2)
   `ARROW_CONE_SEGMENTS`, `ARROW_CONE_RADIUS`, `ARROW_CONE_LENGTH`
 
 **Arrow math** (from spec):
+
 ```
 yaw_rad  = yaw * π/180
 dir_horiz = normalize(sin(yaw_rad), 0, cos(yaw_rad))
@@ -141,25 +147,26 @@ origin, tip, dir }` — used by both geometry building and picking.
 
 ```ts
 export interface SceneState {
-  layers: DecalLayer[]
-  selectedLayerIndex: number | null
-  showMode: 'all' | 'selected'
+  layers: DecalLayer[];
+  selectedLayerIndex: number | null;
+  showMode: "all" | "selected";
 }
 
 export interface SceneHandle {
-  update(state: SceneState): void
-  destroy(): void
+  update(state: SceneState): void;
+  destroy(): void;
 }
 
 export function initScene(
   canvas: HTMLCanvasElement,
-  opts: { onSelect: (index: number | null) => void }
-): SceneHandle
+  opts: { onSelect: (index: number | null) => void },
+): SceneHandle;
 ```
 
 ### Internals
 
 **Initialization** (runs once):
+
 1. Get `WebGLRenderingContext` with `{ antialias: true, alpha: true }`.
 2. Compile shader program (`compileProgram`).
 3. Cache uniform/attribute locations.
@@ -173,14 +180,16 @@ export function initScene(
 8. Start `requestAnimationFrame` loop.
 
 **Camera state**:
+
 ```ts
-let azimuth   = -135 * DEG  // degrees converted to radians
-let elevation =   30 * DEG
-let distance  =  800
-const target  = [0, 80, 0]
+let azimuth = -135 * DEG; // degrees converted to radians
+let elevation = 30 * DEG;
+let distance = 800;
+const target = [0, 80, 0];
 ```
 
 **rAF loop**:
+
 ```
 function frame() {
   if (dirty) {
@@ -192,6 +201,7 @@ function frame() {
 ```
 
 **Render sequence**:
+
 1. Clear color + depth.
 2. Compute view and projection matrices via `lookAt` and `perspective`.
 3. Upload `u_mvp = projection * view`.
@@ -209,6 +219,7 @@ function frame() {
    - Draw cone as `TRIANGLES`.
 
 **Orbit controls** (mouse):
+
 - `mousedown` → record `startX, startY`, set `isDragging = true`.
 - `mousemove` → if dragging: `azimuth += dx * 0.5°`, `elevation -= dy * 0.5°`
   (clamp elevation to [−80°, 80°]); set `dirty`.
@@ -216,6 +227,7 @@ function frame() {
 - `wheel` → `distance = clamp(distance * 1.1^sign, 200, 2000)`; set `dirty`.
 
 **Picking** (on click):
+
 1. Compute NDC of click position.
 2. Reconstruct world-space ray using `invert(projection * view)`.
 3. For each visible arrow, compute ray-to-segment minimum distance
@@ -235,7 +247,7 @@ Matches the spec skeleton. Uses React Spectrum `ToggleButtonGroup` (or two
 `ToggleButton` elements) for the All / Selected toggle in the toolbar.
 
 ```tsx
-import { ToggleButton } from '@adobe/react-spectrum'
+import { ToggleButton } from "@adobe/react-spectrum";
 ```
 
 Canvas gets `width` / `height` set by the ResizeObserver inside `scene.ts`
@@ -273,9 +285,11 @@ Canvas gets `width` / `height` set by the ResizeObserver inside `scene.ts`
 Replace the placeholder div in the Preview tab panel:
 
 ```tsx
-import { Preview } from './components/Preview/Preview'
+import { Preview } from "./components/Preview/Preview";
 // ...
-<Item key="preview"><Preview /></Item>
+<Item key="preview">
+  <Preview />
+</Item>;
 ```
 
 ---
@@ -300,12 +314,12 @@ exists.
 
 ## Key Decisions & Risks
 
-| Topic | Decision |
-|---|---|
-| WebGL version | WebGL 1.0 for broadest compatibility |
-| Math library | Hand-rolled in `math.ts` — spec requires no external deps |
-| Arrow geometry upload | Rebuild VBO each frame when layers change (simple; layer count is small) |
-| Picking accuracy | Ray-to-segment distance on shaft only; cone ignored |
-| Canvas sizing | ResizeObserver sets `canvas.width/height` to match CSS pixel size |
-| `depthMask(false)` for box | Allows arrows behind the car to remain visible |
-| `selectedLayerIndex` | UI-only store field; no undo stack impact |
+| Topic                      | Decision                                                                 |
+| -------------------------- | ------------------------------------------------------------------------ |
+| WebGL version              | WebGL 1.0 for broadest compatibility                                     |
+| Math library               | Hand-rolled in `math.ts` — spec requires no external deps                |
+| Arrow geometry upload      | Rebuild VBO each frame when layers change (simple; layer count is small) |
+| Picking accuracy           | Ray-to-segment distance on shaft only; cone ignored                      |
+| Canvas sizing              | ResizeObserver sets `canvas.width/height` to match CSS pixel size        |
+| `depthMask(false)` for box | Allows arrows behind the car to remain visible                           |
+| `selectedLayerIndex`       | UI-only store field; no undo stack impact                                |

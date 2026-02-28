@@ -23,7 +23,9 @@
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .modeBtn:hover {

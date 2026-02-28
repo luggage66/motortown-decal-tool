@@ -43,11 +43,11 @@ setSelectedLayer: (index: number | null) => void
 
 ## Coordinate System
 
-| Axis | Meaning |
-|------|---------|
+| Axis | Meaning                           |
+| ---- | --------------------------------- |
 | +X   | Car's right side (passenger side) |
-| +Y   | Up |
-| +Z   | Car's front |
+| +Y   | Up                                |
+| +Z   | Car's front                       |
 
 The car box is horizontally centered at the world origin.
 Vertically it sits from `Y = CAR_GROUND_CLEARANCE` to `Y = CAR_GROUND_CLEARANCE + CAR_HEIGHT`.
@@ -72,8 +72,9 @@ dir_horizontal = vec3(sin(yaw_rad), 0, cos(yaw_rad))
 ```
 
 Verification:
-- yaw=0   → (0, 0, 1)  — from back, shooting toward front ✓
-- yaw=90  → (1, 0, 0)  — from left side, shooting rightward ✓
+
+- yaw=0 → (0, 0, 1) — from back, shooting toward front ✓
+- yaw=90 → (1, 0, 0) — from left side, shooting rightward ✓
 - yaw=180 → (0, 0, −1) — from front, shooting toward back ✓
 - yaw=270 → (−1, 0, 0) — from right side, shooting leftward ✓
 
@@ -88,7 +89,8 @@ dir = cos(pitch_rad) × dir_horizontal + sin(pitch_rad) × vec3(0,1,0)
 ```
 
 Verification:
-- pitch=0   → dir = dir_horizontal (flat, parallel to ground) ✓
+
+- pitch=0 → dir = dir_horizontal (flat, parallel to ground) ✓
 - pitch=−45 → negative Y component → arrow tilts downward (from above) ✓
 - pitch=+45 → positive Y component → arrow tilts upward (from below) ✓
 
@@ -124,21 +126,21 @@ tip is exactly at `car_center` and the arrow points directly toward it.
 
 ```ts
 // Car geometry (world units)
-export const CAR_LENGTH            = 500
-export const CAR_WIDTH             = 140
-export const CAR_HEIGHT            = 100
-export const CAR_GROUND_CLEARANCE  = 30
+export const CAR_LENGTH = 500;
+export const CAR_WIDTH = 140;
+export const CAR_HEIGHT = 100;
+export const CAR_GROUND_CLEARANCE = 30;
 
 // Arrow rendering
-export const ARROW_LENGTH          = 250  // half car length
-export const ARROW_CONE_LENGTH     = 20   // length of arrowhead cone
-export const ARROW_CONE_RADIUS     = 8    // radius of arrowhead base
-export const ARROW_CONE_SEGMENTS   = 8    // polygons around the cone
+export const ARROW_LENGTH = 250; // half car length
+export const ARROW_CONE_LENGTH = 20; // length of arrowhead cone
+export const ARROW_CONE_RADIUS = 8; // radius of arrowhead base
+export const ARROW_CONE_SEGMENTS = 8; // polygons around the cone
 
 // Opacity
-export const ARROW_OPACITY_ACTIVE  = 1.0
-export const ARROW_OPACITY_DIMMED  = 0.08  // non-selected in "all" mode
-export const CAR_BOX_OPACITY       = 0.25
+export const ARROW_OPACITY_ACTIVE = 1.0;
+export const ARROW_OPACITY_DIMMED = 0.08; // non-selected in "all" mode
+export const CAR_BOX_OPACITY = 0.25;
 ```
 
 ---
@@ -180,6 +182,7 @@ Color: white `(1, 1, 1)`. Opacity is controlled per-arrow via a uniform.
 ### Per-frame Update
 
 The scene re-renders whenever:
+
 - Camera orbit state changes (mouse drag / wheel).
 - Layer data changes (new import, layer edit).
 - `selectedLayerIndex` changes.
@@ -246,26 +249,28 @@ toggle).
 
 ```tsx
 export function Preview() {
-  const layers = useStore(s => s.layers)
-  const selectedLayerIndex = useStore(s => s.selectedLayerIndex)
-  const setSelectedLayer = useStore(s => s.setSelectedLayer)
+  const layers = useStore((s) => s.layers);
+  const selectedLayerIndex = useStore((s) => s.selectedLayerIndex);
+  const setSelectedLayer = useStore((s) => s.setSelectedLayer);
 
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const sceneRef  = useRef<SceneHandle | null>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sceneRef = useRef<SceneHandle | null>(null);
 
-  const [showMode, setShowMode] = useState<'all' | 'selected'>('all')
+  const [showMode, setShowMode] = useState<"all" | "selected">("all");
 
   // Init WebGL once on mount
   useEffect(() => {
-    if (!canvasRef.current) return
-    sceneRef.current = initScene(canvasRef.current, { onSelect: setSelectedLayer })
-    return () => sceneRef.current?.destroy()
-  }, [])
+    if (!canvasRef.current) return;
+    sceneRef.current = initScene(canvasRef.current, {
+      onSelect: setSelectedLayer,
+    });
+    return () => sceneRef.current?.destroy();
+  }, []);
 
   // Sync data to scene whenever it changes
   useEffect(() => {
-    sceneRef.current?.update({ layers, selectedLayerIndex, showMode })
-  }, [layers, selectedLayerIndex, showMode])
+    sceneRef.current?.update({ layers, selectedLayerIndex, showMode });
+  }, [layers, selectedLayerIndex, showMode]);
 
   return (
     <div className={styles.container}>
@@ -275,7 +280,7 @@ export function Preview() {
       </div>
       <canvas ref={canvasRef} className={styles.canvas} />
     </div>
-  )
+  );
 }
 ```
 

@@ -1,79 +1,84 @@
-import { useMemo, useRef, useState } from 'react'
-import { useStore } from '../store'
-import type { DecalColor } from '../types'
-import { ColorSwatch } from './ColorSwatch'
-import { ColorPicker } from './ColorPicker'
-import styles from './ColorPalette.module.css'
-import pickerStyles from './ColorPicker.module.css'
+import { useMemo, useRef, useState } from "react";
+import { useStore } from "../store";
+import type { DecalColor } from "../types";
+import { ColorSwatch } from "./ColorSwatch";
+import { ColorPicker } from "./ColorPicker";
+import styles from "./ColorPalette.module.css";
+import pickerStyles from "./ColorPicker.module.css";
 
 function colorKey(c: DecalColor): string {
-  return `${c.r},${c.g},${c.b},${c.a}`
+  return `${c.r},${c.g},${c.b},${c.a}`;
 }
 
 interface UniqueColor {
-  color: DecalColor
-  count: number
+  color: DecalColor;
+  count: number;
 }
 
 export function ColorPalette() {
-  const layers = useStore((s) => s.layers)
-  const bulkReplaceColor = useStore((s) => s.bulkReplaceColor)
-  const [editingColor, setEditingColor] = useState<DecalColor | null>(null)
-  const originalColorRef = useRef<DecalColor | null>(null)
+  const layers = useStore((s) => s.layers);
+  const bulkReplaceColor = useStore((s) => s.bulkReplaceColor);
+  const [editingColor, setEditingColor] = useState<DecalColor | null>(null);
+  const originalColorRef = useRef<DecalColor | null>(null);
 
   const uniqueColors = useMemo(() => {
-    const map = new Map<string, UniqueColor>()
+    const map = new Map<string, UniqueColor>();
     for (const layer of layers) {
-      const key = colorKey(layer.color)
-      const existing = map.get(key)
+      const key = colorKey(layer.color);
+      const existing = map.get(key);
       if (existing) {
-        existing.count++
+        existing.count++;
       } else {
-        map.set(key, { color: { ...layer.color }, count: 1 })
+        map.set(key, { color: { ...layer.color }, count: 1 });
       }
     }
-    return Array.from(map.values())
-  }, [layers])
+    return Array.from(map.values());
+  }, [layers]);
 
   const handleSwatchClick = (color: DecalColor) => {
-    originalColorRef.current = { ...color }
-    setEditingColor({ ...color })
-  }
+    originalColorRef.current = { ...color };
+    setEditingColor({ ...color });
+  };
 
   const handleColorChange = (newColor: DecalColor) => {
-    if (!originalColorRef.current) return
-    bulkReplaceColor(originalColorRef.current, newColor)
-    originalColorRef.current = { ...newColor }
-    setEditingColor({ ...newColor })
-  }
+    if (!originalColorRef.current) return;
+    bulkReplaceColor(originalColorRef.current, newColor);
+    originalColorRef.current = { ...newColor };
+    setEditingColor({ ...newColor });
+  };
 
   const closeEditor = () => {
-    setEditingColor(null)
-    originalColorRef.current = null
-  }
+    setEditingColor(null);
+    originalColorRef.current = null;
+  };
 
-  if (layers.length === 0) return null
+  if (layers.length === 0) return null;
 
   return (
     <div>
       <h2 className={styles.sectionTitle}>
-        Palette <span className={styles.sectionCount}>({uniqueColors.length})</span>
+        Palette{" "}
+        <span className={styles.sectionCount}>({uniqueColors.length})</span>
       </h2>
       <div className={styles.grid}>
         {uniqueColors.map((uc) => {
-          const key = colorKey(uc.color)
+          const key = colorKey(uc.color);
           const isEditing =
-            editingColor !== null && colorKey(editingColor) === key
+            editingColor !== null && colorKey(editingColor) === key;
 
           return (
-            <div key={key} className={styles.item} style={{ position: 'relative' }}>
+            <div
+              key={key}
+              className={styles.item}
+              style={{ position: "relative" }}
+            >
               <ColorSwatch
                 color={uc.color}
                 size={28}
                 onClick={() => handleSwatchClick(uc.color)}
               />
               <span className={styles.count}>
-                {uc.count} {uc.count === 1 ? 'layer' : 'layers'}
+                {uc.count} {uc.count === 1 ? "layer" : "layers"}
               </span>
               {isEditing && (
                 <>
@@ -90,9 +95,9 @@ export function ColorPalette() {
                 </>
               )}
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

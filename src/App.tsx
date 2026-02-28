@@ -1,43 +1,51 @@
-import { useEffect } from 'react'
-import { Provider, darkTheme, ToastContainer, Tabs, TabList, TabPanels, Item } from '@adobe/react-spectrum'
-import { UploadScreen } from './components/UploadScreen'
-import { EditorHeader } from './components/EditorHeader'
-import { Sidebar } from './components/Sidebar'
-import { LayerList } from './components/LayerList'
-import { JsonEditor } from './components/JsonEditor'
-import { Preview } from './components/Preview/Preview'
-import { useStore } from './store'
-import styles from './App.module.css'
+import { useEffect } from "react";
+import {
+  Provider,
+  darkTheme,
+  ToastContainer,
+  Tabs,
+  TabList,
+  TabPanels,
+  Item,
+} from "@adobe/react-spectrum";
+import { UploadScreen } from "./components/UploadScreen";
+import { EditorHeader } from "./components/EditorHeader";
+import { Sidebar } from "./components/Sidebar";
+import { LayerList } from "./components/LayerList";
+import { JsonEditor } from "./components/JsonEditor";
+import { Preview } from "./components/Preview/Preview";
+import { useStore } from "./store";
+import styles from "./App.module.css";
 
 function App() {
-  const hasLayers = useStore((s) => s.layers.length > 0)
+  const hasLayers = useStore((s) => s.layers.length > 0);
 
   // Keyboard shortcuts for undo/redo
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      const mod = e.metaKey || e.ctrlKey
-      if (mod && e.key === 'z' && !e.shiftKey) {
-        e.preventDefault()
-        useStore.getState().undo()
-      } else if (mod && e.key === 'z' && e.shiftKey) {
-        e.preventDefault()
-        useStore.getState().redo()
+      const mod = e.metaKey || e.ctrlKey;
+      if (mod && e.key === "z" && !e.shiftKey) {
+        e.preventDefault();
+        useStore.getState().undo();
+      } else if (mod && e.key === "z" && e.shiftKey) {
+        e.preventDefault();
+        useStore.getState().redo();
       }
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // Warn on unsaved changes before unload
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
       if (useStore.getState().isDirty) {
-        e.preventDefault()
+        e.preventDefault();
       }
-    }
-    window.addEventListener('beforeunload', handler)
-    return () => window.removeEventListener('beforeunload', handler)
-  }, [])
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, []);
 
   return (
     <Provider theme={darkTheme} colorScheme="dark">
@@ -55,9 +63,15 @@ function App() {
                   <Item key="preview">Preview</Item>
                 </TabList>
                 <TabPanels UNSAFE_className={styles.tabPanels}>
-                  <Item key="layers"><LayerList /></Item>
-                  <Item key="json"><JsonEditor /></Item>
-                  <Item key="preview"><Preview /></Item>
+                  <Item key="layers">
+                    <LayerList />
+                  </Item>
+                  <Item key="json">
+                    <JsonEditor />
+                  </Item>
+                  <Item key="preview">
+                    <Preview />
+                  </Item>
                 </TabPanels>
               </Tabs>
             </main>
@@ -67,7 +81,7 @@ function App() {
         <UploadScreen />
       )}
     </Provider>
-  )
+  );
 }
 
-export default App
+export default App;

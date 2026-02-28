@@ -19,7 +19,7 @@
 .layerIndex {
   color: var(--text-secondary);
   font-size: 12px;
-  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-family: "SF Mono", "Fira Code", "Consolas", monospace;
   flex-shrink: 0;
   margin-left: auto;
 }
