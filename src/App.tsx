@@ -14,8 +14,9 @@ import { LayerList } from "./components/LayerList";
 import { JsonEditor } from "./components/JsonEditor";
 import { Preview } from "./components/Preview/Preview";
 import { useStore } from "./store";
+import type { DecalLayer } from "./types";
 import styles from "./App.module.css";
-import { style } from "@react-spectrum/s2/style"with {type: 'macro'};
+import { style } from "@react-spectrum/s2/style" with { type: "macro" };
 
 function App() {
   const hasLayers = useStore((s) => s.layers.length > 0);
@@ -36,6 +37,16 @@ function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Auto-load sample file in dev mode
+  useEffect(() => {
+    if (import.meta.env.DEV && useStore.getState().layers.length === 0) {
+      import("./sample1.decal.json").then((mod) => {
+        const data = mod.default as { decal: { decalLayers: DecalLayer[] } };
+        useStore.getState().importLayers(data.decal.decalLayers);
+      });
+    }
+  }, []);
+
   // Warn on unsaved changes before unload
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
@@ -48,7 +59,7 @@ function App() {
   }, []);
 
   return (
-    <Provider>
+    <Provider colorScheme="dark">
       <ToastContainer />
       {hasLayers ? (
         <div className={styles.editorLayout}>
