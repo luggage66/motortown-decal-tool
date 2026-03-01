@@ -1,21 +1,19 @@
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@react-spectrum/s2";
-import { useStore } from "../store";
+import { useDecalStore } from "../store";
 import { LayerCard } from "./LayerCard";
 import styles from "./LayerList.module.css";
 
 export function LayerList() {
-  const layers = useStore((s) => s.layers);
-  const addLayer = useStore((s) => s.addLayer);
-  const reorderLayers = useStore((s) => s.reorderLayers);
+  const layerCount = useDecalStore((s) => s.layers.length);
+  const uniqueKeys = useDecalStore((s) => {
+    const keys = new Set(s.layers.map((l) => l.decalKey).filter(Boolean));
+    return Array.from(keys).sort();
+  });
+  const { addLayer, reorderLayers } = useDecalStore((s) => s.actions);
 
   const dragIndexRef = useRef<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
-
-  const uniqueKeys = useMemo(() => {
-    const keys = new Set(layers.map((l) => l.decalKey).filter(Boolean));
-    return Array.from(keys).sort();
-  }, [layers]);
 
   function handleDrop(targetIndex: number) {
     const from = dragIndexRef.current;
@@ -26,7 +24,7 @@ export function LayerList() {
     setDragOverIndex(null);
   }
 
-  if (layers.length === 0) {
+  if (layerCount === 0) {
     return (
       <div className={styles.emptyState}>
         <p>No layers loaded. Import a decal JSON file to get started.</p>
@@ -39,7 +37,7 @@ export function LayerList() {
 
   return (
     <div className={styles.list}>
-      {layers.map((_, i) => (
+      {Array.from({ length: layerCount }, (_, i) => (
         <div
           key={i}
           className={styles.layerWrapper}
@@ -72,7 +70,7 @@ export function LayerList() {
           <LayerCard index={i} uniqueKeys={uniqueKeys} />
         </div>
       ))}
-      <Button variant="secondary" onPress={addLayer} width="100%">
+      <Button variant="secondary" onPress={addLayer}>
         Add Layer
       </Button>
     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import {
   NumberField,
   Slider,
@@ -7,7 +7,7 @@ import {
   Checkbox,
   ActionButton,
 } from "@react-spectrum/s2";
-import { useStore } from "../store";
+import { useDecalStore } from "../store";
 import { ColorSwatch } from "./ColorSwatch";
 import { ColorPickerTrigger } from "./ColorPicker";
 import { FLAG_DEFINITIONS, getFlagBit, setFlagBit } from "../constants";
@@ -26,11 +26,14 @@ function useSliderState(storeValue: number) {
   return [local, setLocal] as const;
 }
 
-export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
-  const layer = useStore((s) => s.layers[index]);
-  const updateLayer = useStore((s) => s.updateLayer);
-  const duplicateLayer = useStore((s) => s.duplicateLayer);
-  const deleteLayer = useStore((s) => s.deleteLayer);
+export const LayerCard = memo(function LayerCard({
+  index,
+  uniqueKeys,
+}: LayerCardProps) {
+  const layer = useDecalStore((s) => s.layers[index]);
+  const { updateLayer, duplicateLayer, deleteLayer } = useDecalStore(
+    (s) => s.actions,
+  );
 
   // Local state for ComboBox (commit on blur / selection, not every keystroke)
   const [localKey, setLocalKey] = useState(layer?.decalKey ?? "");
@@ -248,4 +251,4 @@ export function LayerCard({ index, uniqueKeys }: LayerCardProps) {
       </div>
     </div>
   );
-}
+});

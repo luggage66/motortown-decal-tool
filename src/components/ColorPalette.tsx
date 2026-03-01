@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { useStore } from "../store";
+import { useDecalStore } from "../store";
 import type { DecalColor } from "../types";
 import { ColorSwatch } from "./ColorSwatch";
 import { ColorPicker } from "./ColorPicker";
@@ -16,8 +16,8 @@ interface UniqueColor {
 }
 
 export function ColorPalette() {
-  const layers = useStore((s) => s.layers);
-  const bulkReplaceColor = useStore((s) => s.bulkReplaceColor);
+  const layers = useDecalStore((s) => s.layers);
+  const { bulkReplaceColor } = useDecalStore((s) => s.actions);
   const [editingColor, setEditingColor] = useState<DecalColor | null>(null);
   const originalColorRef = useRef<DecalColor | null>(null);
 

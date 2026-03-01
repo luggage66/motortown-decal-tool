@@ -1,13 +1,13 @@
 import { useState, useCallback, useRef } from "react";
 import { Button, ToastQueue } from "@react-spectrum/s2";
-import { useStore } from "../store";
+import { useDecalStore } from "../store";
 import { validateDecalJson } from "../utils/validation";
 import styles from "./UploadScreen.module.css";
 
 export function UploadScreen() {
   const [isDragOver, setIsDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const importLayers = useStore((s) => s.importLayers);
+  const { importLayers } = useDecalStore((s) => s.actions);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processJson = useCallback(

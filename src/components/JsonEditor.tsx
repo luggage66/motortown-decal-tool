@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback } from "react";
 import Editor, { type OnMount } from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
-import { useStore } from "../store";
+import { useDecalStore } from "../store";
 import type { DecalFile } from "../types";
 import { validateDecalJson } from "../utils/validation";
 import styles from "./JsonEditor.module.css";
@@ -12,8 +12,8 @@ function buildJson(layers: DecalFile["decal"]["decalLayers"]): string {
 }
 
 export function JsonEditor() {
-  const layers = useStore((s) => s.layers);
-  const importLayers = useStore((s) => s.importLayers);
+  const layers = useDecalStore((s) => s.layers);
+  const { importLayers } = useDecalStore((s) => s.actions);
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const isInternalUpdate = useRef(false);
 

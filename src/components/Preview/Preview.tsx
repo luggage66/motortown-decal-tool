@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { ToggleButton } from "@react-spectrum/s2";
-import { useStore } from "../../store";
+import { useDecalStore } from "../../store";
 import { initScene } from "./webgl/scene";
 import type { SceneHandle } from "./webgl/scene";
 import styles from "./Preview.module.css";
 
 export function Preview() {
-  const layers = useStore((s) => s.layers);
-  const selectedLayerIndex = useStore((s) => s.selectedLayerIndex);
-  const setSelectedLayer = useStore((s) => s.setSelectedLayer);
+  const { layers, selectedLayerIndex } = useDecalStore((s) => ({
+    layers: s.layers,
+    selectedLayerIndex: s.selectedLayerIndex,
+  }));
+  const { setSelectedLayer } = useDecalStore((s) => s.actions);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<SceneHandle | null>(null);

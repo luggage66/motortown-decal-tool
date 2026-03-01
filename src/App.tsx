@@ -13,13 +13,14 @@ import { Sidebar } from "./components/Sidebar";
 import { LayerList } from "./components/LayerList";
 import { JsonEditor } from "./components/JsonEditor";
 import { Preview } from "./components/Preview/Preview";
-import { useStore } from "./store";
+import { useDecalStore, useDecalStoreApi } from "./store";
 import type { DecalLayer } from "./types";
 import styles from "./App.module.css";
 import { style } from "@react-spectrum/s2/style" with { type: "macro" };
 
 function App() {
-  const hasLayers = useStore((s) => s.layers.length > 0);
+  const hasLayers = useDecalStore((s) => s.layers.length > 0);
+  const storeApi = useDecalStoreApi();
 
   // Keyboard shortcuts for undo/redo
   useEffect(() => {
@@ -27,36 +28,36 @@ function App() {
       const mod = e.metaKey || e.ctrlKey;
       if (mod && e.key === "z" && !e.shiftKey) {
         e.preventDefault();
-        useStore.getState().undo();
+        storeApi.getState().actions.undo();
       } else if (mod && e.key === "z" && e.shiftKey) {
         e.preventDefault();
-        useStore.getState().redo();
+        storeApi.getState().actions.redo();
       }
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [storeApi]);
 
   // Auto-load sample file in dev mode
   useEffect(() => {
-    if (import.meta.env.DEV && useStore.getState().layers.length === 0) {
+    if (import.meta.env.DEV && storeApi.getState().layers.length === 0) {
       import("./sample1.decal.json").then((mod) => {
         const data = mod.default as { decal: { decalLayers: DecalLayer[] } };
-        useStore.getState().importLayers(data.decal.decalLayers);
+        storeApi.getState().actions.importLayers(data.decal.decalLayers);
       });
     }
-  }, []);
+  }, [storeApi]);
 
   // Warn on unsaved changes before unload
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
-      if (useStore.getState().isDirty) {
+      if (storeApi.getState().isDirty) {
         e.preventDefault();
       }
     };
     window.addEventListener("beforeunload", handler);
     return () => window.removeEventListener("beforeunload", handler);
-  }, []);
+  }, [storeApi]);
 
   return (
     <Provider colorScheme="dark">

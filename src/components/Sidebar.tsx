@@ -1,9 +1,9 @@
-import { useStore } from "../store";
+import { useDecalStore } from "../store";
 import { ColorPalette } from "./ColorPalette";
 import styles from "./Sidebar.module.css";
 
 export function Sidebar() {
-  const layerCount = useStore((s) => s.layers.length);
+  const layerCount = useDecalStore((s) => s.layers.length);
 
   return (
     <aside className={styles.sidebar}>

@@ -11,21 +11,22 @@ import {
   ToastQueue,
 } from "@react-spectrum/s2";
 import { saveAs } from "file-saver";
-import { useStore } from "../store";
+import { useDecalStore } from "../store";
 import { validateDecalJson } from "../utils/validation";
 import { MAX_LAYERS } from "../constants";
 import type { DecalFile } from "../types";
 import styles from "./EditorHeader.module.css";
 
 export function EditorHeader() {
-  const layers = useStore((s) => s.layers);
-  const isDirty = useStore((s) => s.isDirty);
-  const importLayers = useStore((s) => s.importLayers);
-  const appendLayers = useStore((s) => s.appendLayers);
-  const undo = useStore((s) => s.undo);
-  const redo = useStore((s) => s.redo);
-  const canUndo = useStore((s) => s.undoStack.length > 0);
-  const canRedo = useStore((s) => s.redoStack.length > 0);
+  const { layers, isDirty, canUndo, canRedo } = useDecalStore((s) => ({
+    layers: s.layers,
+    isDirty: s.isDirty,
+    canUndo: s.undoStack.length > 0,
+    canRedo: s.redoStack.length > 0,
+  }));
+  const { importLayers, appendLayers, undo, redo } = useDecalStore(
+    (s) => s.actions,
+  );
   const appendFileInputRef = useRef<HTMLInputElement>(null);
 
   function buildJson(): string {
